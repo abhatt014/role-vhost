@@ -1,0 +1,6 @@
+---
+- name: apache vhost lab
+  hosts: test
+  roles:
+    - vhost
+

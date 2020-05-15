@@ -1,0 +1,34 @@
+---
+# tasks file for vhost
+- name: install apache
+  yum:
+    name: httpd
+    state: latest
+
+- name: copy vhostfile
+  template:
+    src: templates/vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart_httpd
+
+- name: start service httpd
+  service:
+    name: httpd
+    state: restarted
+    enabled: true
+  
+- name: configure vhost directories
+  file:
+    state: directory
+    path: /var/www/html/{{ansible_hostname}}
+    mode: 0755
+
+- name: copy index 
+  template:
+    src: templates/index.j2
+    dest: /var/www/html/{{ansible_hostname}}/index.html
+

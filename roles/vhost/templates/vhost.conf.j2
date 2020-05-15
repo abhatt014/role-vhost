@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@{{ansible_fqdn}}
+    	ErrorLog logs/{{ansible_hostname}}_error.log
+    	Customlog logs/{{ansible_hostname}}_common.log common
+    	DocumentRoot /var/www/html/{{ansible_hostname}}/
+    	ServerName {{ansible_facts.fqdn}}
+    	<Directory /var/www/html/{{ansible_hostname}}>
+		Options +Indexes +FollowSymlinks +Includes
+		Order allow,deny
+		Allow from all
+    	</Directory>
+</VirtualHost>
+
