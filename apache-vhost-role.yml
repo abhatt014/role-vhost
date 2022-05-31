@@ -1,5 +1,5 @@
 ---
-- name: apache vhost lab
+- name: apache vhost lab for personal user
   hosts: test
   roles:
     - vhost
